@@ -1,0 +1,3 @@
+|0	|home	|ngoi nha
+|1	|beach	|bai bien
+|2	|dog	|con cho
