@@ -35,9 +35,7 @@ public class DictionaryManagement {
 				System.out.println("Find sucess!");
 				System.out.println(word.getWord_target()+"         "+word.getWord_explain());
 			}
-			else{
-				System.out.println("Find failed!");
-			}
+			//thieu
 		}
 	}
 	public void insertFromFile(){
