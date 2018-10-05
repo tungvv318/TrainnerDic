@@ -1,9 +1,7 @@
 package dictionary;
-import dictionary.DictionaryManagement;
 
 import java.util.Scanner;
 
-import dictionary.Dictionary;
 
 public class DictionaryCommandline {
 	DictionaryManagement dictionarymanagement = new DictionaryManagement();
@@ -23,14 +21,18 @@ public class DictionaryCommandline {
 	public void dictionaryAdvanced(){
 		//dictionarymanagement.insertFromCommandline();
 		dictionarymanagement.insertFromFile();
+                int choose;
+                do{
+                System.out.println("-----------------------------------------");
 		System.out.println("Choose: ");
 		System.out.println("1.Add Word ");
 		System.out.println("2.Delete Word ");
 		System.out.println("3.edit Word ");
 		System.out.println("4.Find Word");
-		int x = sc.nextInt();
+                System.out.println("5.ShowAllWord");
+		choose = sc.nextInt();
 		sc.nextLine();
-		switch(x){
+		switch(choose){
 			case 1: 
 				dictionarymanagement.addWord();
 				break;
@@ -43,13 +45,19 @@ public class DictionaryCommandline {
 			case 4:
 				dictionarymanagement.dictionarySearcher();
 				break;
+                        case 5:
+                                showAllWord();
+                                break;
 				
 		}
+                }while(choose>=1 && choose<=4);
 		dictionarymanagement.dictionaryExportToFile();
-		//showAllWord();
+		
 	}
 	public static void main(String [] args){
 		DictionaryCommandline dicCommand = new  DictionaryCommandline();
-		dicCommand.dictionaryAdvanced();
+		//dicCommand.dictionaryAdvanced();
+                dicCommand.dictionaryAdvanced();
+                
 	}
 }
