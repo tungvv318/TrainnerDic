@@ -99,9 +99,8 @@ public class DictionaryManagement {
 	//ham nhap tu file
 	public void insertFromFile(){
 		try {
-			FileInputStream fis = new FileInputStream("Dictionary.txt");
-			InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-			BufferedReader br = new BufferedReader(isr);
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("Dictionary.txt")
+                                , "UTF-8"));
 			// gán dòng 1 cho line
 			String line = br.readLine();
 			while(line != null) {
@@ -111,9 +110,6 @@ public class DictionaryManagement {
 				line = br.readLine();	//doc ki tu "\n"			
 			}
 			br.close();
-			isr.close();
-			fis.close();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
