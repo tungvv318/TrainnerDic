@@ -1,14 +1,13 @@
 package dictionary;
-import dictionary.Dictionary;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
-import dictionary.Word;
 
 public class DictionaryManagement {
 	Scanner sc = new Scanner(System.in);
@@ -46,27 +45,38 @@ public class DictionaryManagement {
 	public void addWord(){
 		System.out.println("Nhap tu can them: ");
 		String wordAdd =sc.nextLine();
+                for(int i=0; i<Dictionary.listWord.size(); i++){
+                    Word word = Dictionary.listWord.get(i);
+                    if((word.getWord_target()).equals(wordAdd)){
+                        System.out.println("Tu nay da ton tai!");
+                        return;
+                    }
+                }
 		System.out.println("Giai nghia: ");
 		String wordAddMean =sc.nextLine();
 		Dictionary.listWord.add(new Word(wordAdd,wordAddMean));
-		System.out.println("Them thanh cong");
+		System.out.println("Them thanh cong!");
 	}
 	//xoa tu
 	public void deleteWord(){
 		System.out.println("Nhap tu muon xoa: ");
 		String wordDelete = sc.nextLine();
+                boolean check = false;
 		for (int i = 0; i < Dictionary.listWord.size(); i++) {
 			Word word = Dictionary.listWord.get(i);
 			if(word.getWord_target().equals(wordDelete)){
 				Dictionary.listWord.remove(word);
+                                System.out.println("Xoa thanh cong!");
+                                check = true;
 			}
 			}
-		System.out.println("Xoa thanh cong!");
+		if(check == false) System.out.println("Tu nay khong ton tai trong tu dien!");
 	}
 	//sua tu
 	public void editWord(){
 		System.out.println("Nhap tu muon thay the: ");
 		String replaceWord = sc.nextLine();
+                boolean check = false;
 		for(int i=0; i<Dictionary.listWord.size(); i++){
 			Word word = Dictionary.listWord.get(i);
 			if(word.getWord_target().equals(replaceWord)){
@@ -75,15 +85,17 @@ public class DictionaryManagement {
 				System.out.println("Giai nghia: ");
 				String editWordMean = sc.nextLine();
 				Dictionary.listWord.set(i, new Word(editWord, editWordMean));
+                                System.out.println("Sua thanh cong!");
+                                check = true;
 			}
-			System.out.println("Sua thanh cong!");
 		}
+                if(check == false) System.out.println("Tu nay khong ton tai trong tu dien!");
 	}
 	//ham tim kiem cac tu
 	public void dictionarySearcher(){
 		System.out.println("Nhap tu can tim: ");
 		String wordSearch = sc.nextLine();
-		ArrayList<Word> newList = new ArrayList<Word>();
+		ArrayList<Word> newList = new ArrayList<>();
 		for(int i=0; i<Dictionary.listWord.size(); i++){
 			Word word = Dictionary.listWord.get(i);
 			if(word.getWord_target().indexOf(wordSearch) == 0){
@@ -110,8 +122,7 @@ public class DictionaryManagement {
 				line = br.readLine();	//doc ki tu "\n"			
 			}
 			br.close();
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 		}
 	}
 	//ham xuat ra file
@@ -121,12 +132,12 @@ public class DictionaryManagement {
 			PrintWriter out = new PrintWriter(fos);
 			for(int i=0; i<Dictionary.listWord.size();i++){
 				Word word = Dictionary.listWord.get(i);
-				out.printf("|%d\t|%s\t|%s\n",i,word.getWord_target(),word.getWord_explain());
+				out.printf("|%d\t|%s\t|%s",i,word.getWord_target(),word.getWord_explain());
+                                out.println();
 			}
 			out.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+                    // TODO Auto-generated catch block
 		}
 	}
 }
