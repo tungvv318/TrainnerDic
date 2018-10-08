@@ -50,7 +50,7 @@ public class DictionaryCommandline {
                                 break;
 				
 		}
-                }while(choose>=1 && choose<=4);
+                }while(choose>=1 && choose<=5);
 		dictionarymanagement.dictionaryExportToFile();
 		
 	}
