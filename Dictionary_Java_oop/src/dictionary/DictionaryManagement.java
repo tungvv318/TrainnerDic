@@ -30,16 +30,16 @@ public class DictionaryManagement {
 	public void dictionaryLookup(){
 		System.out.println("nhap tu can tra: ");
 		String wordLookup = sc.nextLine();
+		boolean check = false;
 		for (int i = 0; i < Dictionary.listWord.size(); i++) {
 			Word word = Dictionary.listWord.get(i);
 			if((word.getWord_target()).equals(wordLookup)){
 				System.out.println("Da tim thay!");
 				System.out.println(word.getWord_target()+"         "+word.getWord_explain());
-			}
-			else{
-				System.out.println("Khong tim thay!");
+				check = true;
 			}
 		}
+		if(check == false) System.out.println("Khong tim thay!");
 	}
 	//them tu
 	public void addWord(){
